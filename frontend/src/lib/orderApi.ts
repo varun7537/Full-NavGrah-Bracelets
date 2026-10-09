@@ -1,6 +1,7 @@
 import type { PaymentStatus, StageKey, TrackedOrder } from "../data/Orders";
 
-const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api";
+// const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api";
+const API = process.env.NEXT_PUBLIC_API_URL ?? "https://navgrah-bracelets-api.vercel.app";
 
 export interface CheckoutDetails {
   name: string;
