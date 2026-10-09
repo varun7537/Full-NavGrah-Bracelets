@@ -1,0 +1,1 @@
+export const STAGES = ["placed", "confirmed", "shipped", "out_for_delivery", "delivered"];
