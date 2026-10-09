@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { formatINR } from "../../lib/Currency";
 
-const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api";
+// const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api";
+const API = process.env.NEXT_PUBLIC_API_URL ?? "https://navgrah-bracelets-api.vercel.app";
 const KEY = "ng_admin_secret";
 
 type View = "verify" | "unpaid" | "active" | "delivered" | "cancelled" | "all";
