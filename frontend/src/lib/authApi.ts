@@ -1,4 +1,5 @@
-const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api";
+// const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api";
+const API = process.env.NEXT_PUBLIC_API_URL ?? "https://navgrah-bracelets-api.vercel.app";
 
 export interface AuthUser {
   id: string;
