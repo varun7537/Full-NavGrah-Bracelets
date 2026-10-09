@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,440;0,9..144,560;1,9..144,440&family=Karla:wght@400;500;600&display=swap');
+
+.ng-about {
+  /* ---- color tokens ---- */
+  --ng-void: #0f0b1a;       /* night-sky base */
+  --ng-void-2: #171025;     /* slightly lifted panel */
+  --ng-void-3: #1d1730;     /* card / cell surface */
+  --ng-brass: #c08a3e;      /* planetary brass, primary accent */
+  --ng-brass-dim: #8a662f;
+  --ng-vermillion: #b14432; /* sindoor red, used once */
+  --ng-ivory: #f1e9d8;      /* primary text on dark */
+  --ng-mist: #a79cc4;       /* secondary text on dark */
+  --ng-line: rgba(241, 233, 216, 0.12);
+  --ng-line-strong: rgba(192, 138, 62, 0.35);
+
+  background-color: var(--ng-void);
+  color: var(--ng-ivory);
+  font-family: 'Karla', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ng-about ::selection {
+  background: var(--ng-brass);
+  color: var(--ng-void);
+}
+
+.ng-about :focus-visible {
+  outline: 2px solid var(--ng-brass);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- display type ---- */
+.ng-serif {
+  font-family: 'Fraunces', ui-serif, Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+.ng-hero-heading {
+  font-size: clamp(2.5rem, 1.4rem + 4.6vw, 4.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  font-weight: 440;
+}
+
+.ng-section-heading {
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.005em;
+  font-weight: 440;
+}
+
+/* ---- story panel: first-line lead-in, quiet drop cap ---- */
+.ng-story p:first-of-type::first-letter {
+  font-family: 'Fraunces', serif;
+  font-weight: 560;
+  font-size: 3.4em;
+  float: left;
+  line-height: 0.82;
+  padding-right: 0.09em;
+  padding-top: 0.03em;
+  color: var(--ng-brass);
+}
+
+/* ---- hairline dividers ---- */
+.ng-rule {
+  border-color: var(--ng-line);
+}
+
+/* ==========================================================================
+   Hero thread — a circle of nine beads, one lit.
+   ========================================================================== */
+.ng-thread-circle {
+  stroke: var(--ng-line-strong);
+}
+
+.ng-thread-bead {
+  stroke: var(--ng-brass-dim);
+  fill: var(--ng-void);
+}
+
+.ng-thread-bead--lit {
+  fill: var(--ng-brass);
+  stroke: var(--ng-brass);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ng-thread-circle {
+    stroke-dasharray: 754;
+    stroke-dashoffset: 754;
+    animation: ng-draw-thread 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s forwards;
+  }
+
+  .ng-thread-bead {
+    opacity: 0;
+    transform-origin: center;
+    animation: ng-bead-in 0.5s ease-out forwards;
+  }
+}
+
+@keyframes ng-draw-thread {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ng-bead-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   The Navagraha mandala — a 3x3 grid with Surya at the center,
+   the traditional arrangement used in navagraha puja layouts.
+   ========================================================================== */
+.ng-mandala {
+  border: 1px solid var(--ng-line);
+}
+
+.ng-mandala-cell {
+  border: 1px solid var(--ng-line);
+  background-color: var(--ng-void-2);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.ng-mandala-cell:hover,
+.ng-mandala-cell:focus-within {
+  background-color: var(--ng-void-3);
+  border-color: var(--ng-line-strong);
+}
+
+.ng-mandala-cell--surya {
+  background:
+    radial-gradient(circle at 50% 38%, rgba(192, 138, 62, 0.28), rgba(192, 138, 62, 0) 68%),
+    var(--ng-void-3);
+  border-color: var(--ng-line-strong);
+}
+
+.ng-mandala-cell--surya .ng-graha-sanskrit {
+  color: var(--ng-brass);
+}
+
+/* ==========================================================================
+   Responsive guardrails
+   ========================================================================== */
+@media (max-width: 480px) {
+  .ng-story p:first-of-type::first-letter {
+    font-size: 2.7em;
+  }
+}

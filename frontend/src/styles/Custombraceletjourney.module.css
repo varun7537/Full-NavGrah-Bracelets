@@ -1,0 +1,64 @@
+/* src/styles/Custombraceletjourney.module.css */
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 9999px;
+  border: 3px solid #e7dfd5;
+  border-top-color: #a47735;
+  animation: cbj-spin 0.9s linear infinite;
+}
+
+@keyframes cbj-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Thin progress line under the "astrologer is reviewing" copy. */
+.progressTrack {
+  position: relative;
+  height: 3px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: #efe7dc;
+}
+
+.progressTrack::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 40%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, transparent, #a47735, transparent);
+  animation: cbj-slide 1.6s ease-in-out infinite;
+}
+
+@keyframes cbj-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+/* Applied when the user has asked for reduced motion. */
+.noMotion,
+.noMotion::after {
+  animation: none !important;
+}
+
+.noMotion.spinner {
+  border-top-color: #a47735;
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner,
+  .progressTrack::after {
+    animation: none;
+  }
+}

@@ -1,0 +1,234 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+
+.fontDisplay {
+  font-family: "Fraunces", Georgia, serif;
+}
+
+.fontMeta {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ---------- Responsive cabinet visibility ---------- */
+.desktopCabinet {
+  display: none;
+}
+
+.mobileCabinet {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .desktopCabinet {
+    display: grid;
+  }
+
+  .mobileCabinet {
+    display: none;
+  }
+}
+
+/* ---------- Desktop cabinet ---------- */
+.rail {
+  grid-auto-flow: column;
+  transition: grid-template-columns 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  --collapsed-track: 56px;
+}
+
+@media (min-width: 768px) {
+  .rail {
+    --collapsed-track: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .rail {
+    --collapsed-track: 80px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .rail {
+    --collapsed-track: 96px;
+  }
+}
+
+.tab {
+  position: relative;
+  transition: background-color 500ms ease, transform 300ms ease, box-shadow 300ms ease;
+}
+
+.tab + .tab {
+  border-left: 1px solid rgba(33, 29, 26, 0.08);
+}
+
+.tab[data-active="false"]:hover,
+.tab[data-active="false"]:focus-within {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px -18px rgba(33, 29, 26, 0.35);
+}
+
+.tab::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--tab-accent);
+}
+
+.spineLabel {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  transition: opacity 350ms ease;
+}
+
+.spineLabel[data-visible="false"] {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.horizontalLabel {
+  transition: opacity 400ms ease 100ms, transform 400ms ease 100ms;
+}
+
+.horizontalLabel[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  position: absolute;
+}
+
+.panelContent {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 500ms ease 150ms, transform 500ms ease 150ms;
+}
+
+.panelContent[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.iconBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--tab-accent-soft);
+  color: var(--tab-accent);
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tab[data-active="true"] .iconBadge {
+  transform: scale(1.08);
+}
+
+.imageGlow {
+  position: absolute;
+  inset: -6%;
+  border-radius: 12px;
+  filter: blur(28px);
+  opacity: 0.55;
+  background: var(--tab-accent-soft);
+}
+
+.imageFrame {
+  overflow: hidden;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.imageFrame:hover img,
+.imageFrame:focus-within img {
+  transform: scale(1.045);
+}
+
+.imageFrame img {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tick {
+  width: 2px;
+  height: 20px;
+  opacity: 0.85;
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tick[data-open="true"] {
+  transform: rotate(90deg);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  opacity: 0.35;
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+.dot[data-active="true"] {
+  opacity: 1;
+  transform: scale(1.4);
+}
+
+/* ---------- Mobile cabinet ---------- */
+.mRow {
+  border-left: 4px solid var(--tab-accent);
+  transition: background-color 400ms ease;
+}
+
+.mPanel {
+  display: grid;
+  grid-template-rows: minmax(0, 0fr);
+  transition: grid-template-rows 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mPanel[data-open="true"] {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.mPanelInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.mTick {
+  width: 20px;
+  height: 2px;
+  opacity: 0.85;
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mTick[data-open="true"] {
+  transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail,
+  .tab,
+  .spineLabel,
+  .horizontalLabel,
+  .panelContent,
+  .iconBadge,
+  .imageFrame,
+  .imageFrame img,
+  .tick,
+  .dot,
+  .mRow,
+  .mPanel,
+  .mTick {
+    transition-duration: 1ms !important;
+  }
+}

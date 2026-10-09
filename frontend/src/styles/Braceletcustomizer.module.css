@@ -1,0 +1,219 @@
+.root {
+  --paper: #ede6d3;
+  --paper-2: #f6f1e4;
+  --ink: #221c13;
+  --ink-dim: rgba(34, 28, 19, 0.62);
+  --ink-faint: rgba(34, 28, 19, 0.35);
+  --line: #d6caac;
+  --brass: #8c6a2e;
+  --brass-light: #d8b876;
+  --brass-deep: #6e5527;
+}
+
+.revealRow {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease-out;
+  margin-top: 0;
+}
+
+.revealRow.revealRowOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 1rem;
+}
+
+.revealInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.revealRow.noMotion {
+  transition: none;
+}
+
+.switch {
+  position: relative;
+  width: 3rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background-color: var(--paper-2);
+  border: 1px solid var(--line);
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease;
+  flex-shrink: 0;
+}
+
+.switch.switchOn {
+  background-color: var(--ink);
+  border-color: var(--ink);
+}
+
+.switchThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: 999px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(34, 28, 19, 0.25);
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), background-color 220ms ease;
+}
+
+.switch.switchOn .switchThumb {
+  background-color: var(--brass-light);
+  transform: translateX(1.25rem);
+}
+
+.switch.noMotion,
+.switch.noMotion .switchThumb {
+  transition: none;
+}
+
+.input {
+  background-color: #ffffff;
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.input::placeholder {
+  color: var(--ink-faint);
+}
+
+.hallmark {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--brass);
+  color: var(--brass);
+  background-color: var(--paper-2);
+}
+
+.plate {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translate(-50%, 10px) scale(0.9) rotate(-1.5deg);
+  opacity: 0;
+  transition: opacity 180ms ease-out;
+  pointer-events: none;
+}
+
+.plate.plateOn {
+  opacity: 1;
+  animation: plateStamp 420ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes plateStamp {
+  0% {
+    transform: translate(-50%, 10px) scale(0.9) rotate(-1.5deg);
+  }
+  60% {
+    transform: translate(-50%, -2px) scale(1.03) rotate(0.4deg);
+  }
+  100% {
+    transform: translate(-50%, 0) scale(1) rotate(0deg);
+  }
+}
+
+.plateInner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.75rem;
+  padding: 0.55rem 1rem;
+  background: linear-gradient(135deg, var(--brass-light) 0%, var(--brass) 45%, var(--brass-light) 100%);
+  box-shadow:
+    0 2px 6px rgba(34, 28, 19, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.plateInner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.7) 45%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+}
+
+.plate.plateOn .plateInner::before {
+  animation: plateShimmer 700ms ease-out 380ms 1;
+}
+
+.plateText {
+  position: relative;
+  font-family: 'Fraunces', ui-serif, Georgia, serif;
+  font-style: italic;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: #362a12;
+  white-space: nowrap;
+}
+
+@keyframes plateShimmer {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.plate.noMotion {
+  transition: none;
+  animation: none;
+  transform: translate(-50%, 0) scale(1) rotate(0deg);
+}
+
+.plate.noMotion .plateInner::before {
+  animation: none;
+}
+
+.cta {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+
+.cta:hover:not(:disabled) {
+  background-color: var(--brass-deep);
+}
+
+.cta:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.cta:disabled {
+  background-color: var(--line);
+  color: var(--ink-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealRow,
+  .switch,
+  .switchThumb,
+  .plate {
+    transition: none !important;
+    animation: none !important;
+  }
+  .plateInner::before {
+    animation: none !important;
+  }
+  .cta:active:not(:disabled) {
+    transform: none;
+  }
+}

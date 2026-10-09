@@ -1,0 +1,99 @@
+.navgrah-promo-bar {
+    background-color: #2a0f1f;
+}
+
+.navgrah-bg-gradient {
+    background: linear-gradient(
+    100deg,
+    #2a0f1f 0%,
+    #3d1230 22%,
+    #341a4d 45%,
+    #3d1230 68%,
+    #2a0f1f 100%
+    );
+    background-size: 220% 220%;
+    animation: navgrah-gradient-shift 14s ease-in-out infinite;
+}
+
+.navgrah-shimmer-text {
+    background: linear-gradient(
+    100deg,
+    #e8c98a 0%,
+    #fff3d6 20%,
+    #e8c98a 40%,
+    #f8e7bd 60%,
+    #e8c98a 100%
+    );
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: navgrah-shimmer 6s linear infinite;
+}
+
+.navgrah-moon-glow {
+    animation: navgrah-glow-pulse 4s ease-in-out infinite;
+}
+
+.navgrah-twinkle {
+    animation: navgrah-twinkle-fade 3.2s ease-in-out infinite;
+}
+
+.navgrah-message-fade {
+    animation: navgrah-fade-in 0.5s ease;
+}
+
+.navgrah-enter {
+    animation: navgrah-slide-down 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navgrah-exit {
+    animation: navgrah-slide-up 0.32s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes navgrah-gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes navgrah-shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes navgrah-glow-pulse {
+    0%, 100% { opacity: 0.65; filter: drop-shadow(0 0 0px rgba(243,217,164,0)); }
+    50% { opacity: 1; filter: drop-shadow(0 0 5px rgba(243,217,164,0.7)); }
+}
+
+@keyframes navgrah-twinkle-fade {
+    0%, 100% { opacity: 0.2; transform: scale(0.85) translateY(0); }
+    50% { opacity: 0.9; transform: scale(1.1) translateY(-1px); }
+}
+
+@keyframes navgrah-fade-in {
+    from { opacity: 0; transform: translateY(2px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes navgrah-slide-down {
+    from { opacity: 0; transform: translateY(-100%); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes navgrah-slide-up {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navgrah-bg-gradient,
+    .navgrah-shimmer-text,
+    .navgrah-moon-glow,
+    .navgrah-twinkle,
+    .navgrah-message-fade,
+    .navgrah-enter,
+    .navgrah-exit {
+    animation: none !important;
+    }
+}
